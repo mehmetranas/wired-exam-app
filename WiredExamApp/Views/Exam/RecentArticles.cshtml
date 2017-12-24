@@ -1,0 +1,274 @@
+﻿@model List<WiredExamApp.Models.Title>
+@{
+    ViewBag.Title = "RecentArticle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RecentArticle</h2>
+<form id="form">
+    <div class="container">
+        <div class="well">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="form-group">
+                        <select class="form-control" id="title" required>
+                            <option value="" disabled selected>Seçiniz</option>
+                            @foreach (var title in Model)
+                            {
+                                <option value="@title.ArticleLink">@title.ArticleTitle</option>
+                            }
+                        </select>
+                    </div>
+                    <label>Seçili Yazı Metni</label>
+                    <div class="panel panel-default">
+                        <div class="panel-body" id="article-text">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @for (var i = 0; i < 4; i++)
+            {
+                <div class="question">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="form-group">
+                                @Html.Label("Soru " + (i + 1))
+                                @Html.TextArea("question",
+                                              new
+                                              {
+                                                  @class = "form-control",
+                                                  id = "questionText" + i,
+                                                  placeholder = "Soru",
+                                                  rows = "3",
+                                                  required = "true"
+                                              })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-2">
+                            <div class="form-group">
+                                @Html.Label("A")
+                                @Html.TextBox("question", "",
+                                              new
+                                              {
+                                                  @class = "form-control",
+                                                  id = "question" + i + "selection1",
+                                                  placeholder = "Seçenek",
+                                                  required = "true"
+                                              })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.Label("B")
+                                @Html.TextBox("question", "",
+                                              new
+                                              {
+                                                  @class = "form-control",
+                                                  id = "question" + i + "selection2",
+                                                  placeholder = "Seçenek",
+                                                  required = "true"
+                                              })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-2">
+                            <div class="form-group">
+                                @Html.Label("C")
+                                @Html.TextBox("question", "",
+                                              new
+                                              {
+                                                  @class = "form-control",
+                                                  id = "question" + i + "selection3",
+                                                  placeholder = "Seçenek",
+                                                  required = "true"
+                                              })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.Label("D")
+                                @Html.TextBox("question", "",
+                                              new
+                                              {
+                                                  @class = "form-control",
+                                                  id = "question" + i + "selection4",
+                                                  placeholder = "Seçenek",
+                                                  required = "true"
+                                              })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="form-group">
+                                @Html.Label("Cevap")
+                                @Html.DropDownList("Value", new List<SelectListItem>()
+                                                            {
+                                                                new SelectListItem {Text = "Lütfen cevabı seçiniz", Value = "", Disabled = true, Selected = true},
+                                                                new SelectListItem {Text = "A", Value = "1"},
+                                                                new SelectListItem {Text = "B", Value = "2"},
+                                                                new SelectListItem {Text = "C", Value = "3"},
+                                                                new SelectListItem {Text = "D", Value = "4"}
+                                                            }, new
+                                                            {
+                                                                @class = "form-control",
+                                                                required = "true",
+                                                                id = "answer" + i
+                                                            })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <hr>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-5">
+                    <button class="btn btn-success" id="submitButton" type="button">Sınavı Oluştur</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#title").change(
+                function () {
+                    var link = this.value;
+                    $("#article-text").html("<i class='text-muted text-center' id='load-state-text'>Yükleniyor...</i>");
+
+                    $.getJSON("/api/wiredservice?queryString=" + link,
+                        function (article) {
+                            if (!article) $("#article-text").html("<i class='text-muted text-center' id='load-state-text'>Her hangş bir içerik döndürülemedi</i>");
+                            else
+                                $("#article-text").html(article);
+                        })
+                        .done(function () {
+                            console.log("success load titles");
+                        })
+                        .fail(function () {
+                            $("#load-state-text").show().innerText = "Bir hata oluştu lütfen tekrar deneyiniz.";
+                        });
+                });
+
+            
+            $("#submitButton").click(function () {
+                var valid = $('form')[0].checkValidity();
+                if (!valid) {
+                    bootbox.alert({
+                        size: "small",
+                        title: "Opps!",
+                        buttons: {
+                            "ok": {
+                                "label": "Tamam",
+                                "className": "btn-danger"
+                            }
+                        },
+                        message: "Bütün alanların doldurulması gerekli.",
+                        callback: function() {
+                           
+                        }
+                    });
+                    return;
+                }
+                var dto = {
+                    articleText: $("#article-text").text(),
+                    title: $("#title option:selected").text(),
+                    questions: [
+                        {
+                            questionText: $("#questionText0").val(),
+                            selections: [
+                                { text: $("#question0selection1").val()},
+                                { text: $("#question0selection2").val()},
+                                { text: $("#question0selection3").val()},
+                                { text: $("#question0selection4").val()}
+                            ],
+                            answer: $("#answer0 option:selected").val()
+                        },
+                        {
+                            questionText: $("#questionText1").val(),
+                            selections: [
+                                { text: $("#question1selection1").val()},
+                                { text: $("#question1selection2").val()},
+                                { text: $("#question1selection3").val()},
+                                { text: $("#question1selection4").val()}
+                            ],
+                            answer: $("#answer1 option:selected").val()
+                        },
+                        {
+                            questionText: $("#questionText2").val(),
+                            selections: [
+                                { text: $("#question2selection1").val()},
+                                { text: $("#question2selection2").val()},
+                                { text: $("#question2selection3").val()},
+                                { text: $("#question2selection4").val()}
+                            ],
+                            answer: $("#answer2 option:selected").val()
+                        },
+                        {
+                            questionText: $("#questionText3").val(),
+                            selections: [
+                                { text: $("#question3selection1").val()},
+                                { text: $("#question3selection2").val()},
+                                { text: $("#question3selection3").val()},
+                                { text: $("#question3selection4").val()}
+                            ],
+                            answer: $("#answer3 option:selected").val()
+                        }
+                    ]
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/exam",
+                    data: dto,
+                    success: function (res) {
+                        bootbox.alert({
+                            size: "small",
+                            title: "Tebrikler",
+                            buttons: {
+                                "ok": {
+                                    "label": "Tamam",
+                                    "className": "btn-success"
+                                }
+                            },
+                            message: "Sınav başarı ile oluşturuldu.",
+                            callback: function() {
+                                document.getElementById("form").reset();
+                            }
+                        });
+                    },
+                    error: function (err) {
+                        if (err.status === 400) {
+                            bootbox.alert({
+                                size: "small",
+                                title: "Oopps!",
+                                buttons: {
+                                    "ok": {
+                                        "label": "Tamam",
+                                        "className": "btn-danger"
+                                    }
+                                },
+                                message: "Lütfen tüm alanları eksiksiz doldurup tekrar deneyiniz.",
+                                callback: function() {
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+
