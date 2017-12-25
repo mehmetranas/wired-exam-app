@@ -5,8 +5,9 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using Ninject.Infrastructure.Language;
+using WiredExamApp.Core.Models;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.Models;
+using WiredExamApp.Persistence.Model;
 
 namespace WiredExamApp.Persistence.Repositories
 {

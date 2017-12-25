@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using HtmlAgilityPack;
 using WiredExamApp.Helper;
-using WiredExamApp.Models;
 
 namespace WiredExamApp.Controllers.API_Controllers
 {

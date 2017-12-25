@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WiredExamApp.Core.Models;
 using WiredExamApp.Core.Repositories;
 using WiredExamApp.Helper;
-using WiredExamApp.Models;
+using WiredExamApp.Persistence.Model;
 using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Controllers

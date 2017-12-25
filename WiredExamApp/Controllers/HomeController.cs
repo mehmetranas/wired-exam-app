@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.Models;
 using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Controllers

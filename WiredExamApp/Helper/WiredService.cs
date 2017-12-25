@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using WiredExamApp.Models;
+using WiredExamApp.Core.Models;
 
 namespace WiredExamApp.Helper
 {

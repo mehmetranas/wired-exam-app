@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace WiredExamApp.Models
+namespace WiredExamApp.Core.Models
 {
     public class Question
     {

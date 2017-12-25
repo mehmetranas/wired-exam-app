@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace WiredExamApp.DTOs
+﻿namespace WiredExamApp.Core.DTOs
 {
     public class AnswerRequestDto
     {

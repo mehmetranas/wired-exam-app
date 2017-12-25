@@ -10,7 +10,6 @@ using Ninject.Web.Common.WebHost;
 using Ninject.Web.WebApi;
 using WiredExamApp.App_Start;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.Models;
 using WiredExamApp.Persistence.Repositories;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]

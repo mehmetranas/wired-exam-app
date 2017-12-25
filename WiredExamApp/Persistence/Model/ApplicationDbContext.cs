@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WiredExamApp.Core.Models;
 
-namespace WiredExamApp.Models
+namespace WiredExamApp.Persistence.Model
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -245,37 +245,37 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Core\Repositories\IUnitOfWork.cs" />
-    <Compile Include="Core\Repositories\QuestionRepository.cs" />
-    <Compile Include="DTOs\AnswerRequestDto.cs" />
-    <Compile Include="DTOs\AnswerResponseDto.cs" />
-    <Compile Include="DTOs\ExamDto.cs" />
-    <Compile Include="DTOs\QuestionDto.cs" />
-    <Compile Include="DTOs\SelectionDto.cs" />
+    <Compile Include="Core\Repositories\IQuestionRepository.cs" />
+    <Compile Include="Core\DTOs\AnswerRequestDto.cs" />
+    <Compile Include="Core\DTOs\AnswerResponseDto.cs" />
+    <Compile Include="Core\DTOs\ExamDto.cs" />
+    <Compile Include="Core\DTOs\QuestionDto.cs" />
+    <Compile Include="Core\DTOs\SelectionDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\AnswerValidation.cs" />
     <Compile Include="Helper\Validations.cs" />
-    <Compile Include="Migrations\201712241559520_Initial model.cs" />
-    <Compile Include="Migrations\201712241559520_Initial model.Designer.cs">
+    <Compile Include="Persistence\Migrations\201712241559520_Initial model.cs" />
+    <Compile Include="Persistence\Migrations\201712241559520_Initial model.Designer.cs">
       <DependentUpon>201712241559520_Initial model.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712242149557_Add datetime column to exam table.cs" />
-    <Compile Include="Migrations\201712242149557_Add datetime column to exam table.Designer.cs">
+    <Compile Include="Persistence\Migrations\201712242149557_Add datetime column to exam table.cs" />
+    <Compile Include="Persistence\Migrations\201712242149557_Add datetime column to exam table.Designer.cs">
       <DependentUpon>201712242149557_Add datetime column to exam table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Selection.cs" />
-    <Compile Include="Models\Exam.cs" />
-    <Compile Include="Models\Question.cs" />
+    <Compile Include="Persistence\Migrations\Configuration.cs" />
+    <Compile Include="Persistence\Model\ApplicationDbContext.cs" />
+    <Compile Include="Core\Models\Selection.cs" />
+    <Compile Include="Core\Models\Exam.cs" />
+    <Compile Include="Core\Models\Question.cs" />
     <Compile Include="Core\Repositories\IExamRepository.cs" />
-    <Compile Include="Models\Title.cs" />
+    <Compile Include="Core\Models\Title.cs" />
     <Compile Include="Persistence\Repositories\ExamRepository.cs" />
     <Compile Include="Persistence\Repositories\QuestionRepository.cs" />
     <Compile Include="Persistence\Repositories\UnitOfWork.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Core\Models\IdentityModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Helper\WiredService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -355,10 +355,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712241559520_Initial model.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201712241559520_Initial model.resx">
       <DependentUpon>201712241559520_Initial model.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712242149557_Add datetime column to exam table.resx">
+    <EmbeddedResource Include="Persistence\Migrations\201712242149557_Add datetime column to exam table.resx">
       <DependentUpon>201712242149557_Add datetime column to exam table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using AutoMapper;
-using WiredExamApp.DTOs;
-using WiredExamApp.Models;
+using WiredExamApp.Core.DTOs;
+using WiredExamApp.Core.Models;
 
 namespace WiredExamApp.App_Start
 {

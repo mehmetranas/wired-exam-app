@@ -6,10 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using AutoMapper;
+using WiredExamApp.Core.DTOs;
+using WiredExamApp.Core.Models;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.DTOs;
 using WiredExamApp.Helper;
-using WiredExamApp.Models;
+using WiredExamApp.Persistence.Model;
 using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Controllers.API_Controllers

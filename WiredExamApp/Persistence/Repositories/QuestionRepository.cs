@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WiredExamApp.Core.Models;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.Models;
+using WiredExamApp.Persistence.Model;
 
 namespace WiredExamApp.Persistence.Repositories
 {

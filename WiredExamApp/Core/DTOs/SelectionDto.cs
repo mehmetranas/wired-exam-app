@@ -1,4 +1,4 @@
-﻿namespace WiredExamApp.DTOs
+﻿namespace WiredExamApp.Core.DTOs
 {
     public class SelectionDto
     {

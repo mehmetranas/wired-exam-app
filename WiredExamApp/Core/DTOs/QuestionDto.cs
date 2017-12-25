@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WiredExamApp.DTOs
+namespace WiredExamApp.Core.DTOs
 {
     public class QuestionDto
     {

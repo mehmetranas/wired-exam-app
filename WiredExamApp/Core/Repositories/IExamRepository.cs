@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WiredExamApp.Models;
+using WiredExamApp.Core.Models;
 
 namespace WiredExamApp.Core.Repositories
 {

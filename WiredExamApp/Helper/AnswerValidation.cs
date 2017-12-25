@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WiredExamApp.Core.DTOs;
+using WiredExamApp.Core.Models;
 using WiredExamApp.Core.Repositories;
-using WiredExamApp.DTOs;
-using WiredExamApp.Models;
+using WiredExamApp.Persistence.Model;
 using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Helper

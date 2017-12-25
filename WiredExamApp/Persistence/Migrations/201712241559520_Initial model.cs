@@ -1,8 +1,7 @@
-namespace WiredExamApp.Migrations
+using System.Data.Entity.Migrations;
+
+namespace WiredExamApp.Persistence.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class Initialmodel : DbMigration
     {
         public override void Up()

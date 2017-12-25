@@ -1,18 +1,18 @@
-namespace WiredExamApp.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
+using WiredExamApp.Core.Models;
+using WiredExamApp.Persistence.Model;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WiredExamApp.Models.ApplicationDbContext>
+namespace WiredExamApp.Persistence.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"Persistence\Migrations";
         }
 
-        protected override void Seed(WiredExamApp.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
