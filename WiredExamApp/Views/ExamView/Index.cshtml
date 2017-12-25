@@ -1,0 +1,143 @@
+﻿@model WiredExamApp.Models.Exam
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<form id="form">
+    <div class="container exam">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="article text-center" id="article">
+                    <h4><strong>@Model.Title</strong></h4>
+                    <p>@Model.ArticleText</p>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class=" questions col-md-12">
+
+                @for (var i = 0; i < 4; i++)
+                {
+                    <div class="col-md-6 question" data-question-id="@Model.Questions.ElementAt(i).Id">
+                        <div>
+                            <p><strong>@(i + 1))&nbsp;</strong>@Model.Questions.ElementAt(i).QuestionText</p>
+                        </div>
+
+                        <div class="selection" data-answer-value="1">
+                            <p><strong>A-&nbsp;</strong>@Model.Questions.ElementAt(i).Selections.ElementAt(0).Text</p>
+                        </div>
+                        <div class="selection" data-answer-value="2">
+                            <p><strong>B-&nbsp;</strong>@Model.Questions.ElementAt(i).Selections.ElementAt(1).Text</p>
+                        </div>
+                        <div class="selection" data-answer-value="3">
+                            <p><strong>C-&nbsp;</strong>@Model.Questions.ElementAt(i).Selections.ElementAt(2).Text</p>
+                        </div>
+                        <div class="selection" data-answer-value="4">
+                            <p><strong>D-&nbsp;</strong>@Model.Questions.ElementAt(i).Selections.ElementAt(3).Text</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <button class="btn btn-primary" id="submitButton" type="button">Sınavı Oluştur</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var answers = [];
+
+            $(".selection").hover(function() {
+                $(this).toggleClass("bg-info");
+            });
+            $(".selection").on("click",
+                function () {
+                    var parent = $(this).closest(".question");
+                    $(parent).find(".bg-primary").removeClass("bg-primary");
+                    $(this).toggleClass("bg-primary");
+                    var answer = {
+                        questionId: $(this).closest(".question").attr("data-question-id"),
+                        answerValue: $(this).attr("data-answer-value")
+                    };
+                    var answerInAnswers = answers.find(function (ans) { return ans.questionId === answer.questionId });
+                    if (answerInAnswers) {
+                        answerInAnswers.answerValue = answer.answerValue;
+                    } else {
+                        answers.push(answer);
+                    }
+                });
+            $("#submitButton").click(function () {
+                console.log(answers);
+                function getAnswers() {
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/answer",
+                        data: answers,
+                        success: function() {
+                            console.log("successfully posted");
+                        },
+                        error: function(err) {
+                            bootbox.alert({
+                                size: "small",
+                                title: "Üzgünüm!",
+                                buttons: {
+                                    "ok": {
+                                        "label": "Tamam",
+                                        "className": "btn-info"
+                                    }
+                                },
+                                message: "Bir hata oluştu, sayfa yenilendikten sonra tekrar deneyiniz.",
+                                callback: function() {
+                                    location.reload();
+                                    console.log(err);
+                                }
+                            });
+                        }
+                    });
+
+                }
+
+                var isValid = answers.length === 4;
+                if (!isValid) {
+
+                    bootbox.confirm({
+                        size: "small",
+                        title: "Dikkat!",
+                        buttons: {
+                            "confirm": {
+                                "label": "Evet",
+                                "className": "btn-danger"
+                            },
+                            "cancel": {
+                                "label": "Hayır",
+                                "className": "btn-primary"
+                            }
+                        },
+                        message: "Tüm soruları cevaplamadınız, yine de onaylamak istiyor musunuz?",
+                        callback: function(result) {
+                            if (result) {
+                                getAnswers();
+                            }
+                        }
+                    });
+                } else {
+                    getAnswers();
+                }
+            });
+        });
+    </script>
+
+}

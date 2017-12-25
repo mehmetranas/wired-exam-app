@@ -18,5 +18,6 @@ namespace WiredExamApp.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

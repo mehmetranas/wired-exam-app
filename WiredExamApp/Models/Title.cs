@@ -8,8 +8,9 @@ namespace WiredExamApp.Models
 {
     public class Title
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string ArticleTitle { get; set; }
         public string ArticleLink { get; set; }
+        public DateTime? CreateDateTime { get; set; }
     }
 }

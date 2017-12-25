@@ -20,7 +20,8 @@
                         </select>
                     </div>
                     <label>Seçili Yazı Metni</label>
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary" id="article-panel">
+                        <div class="panel-heading" id="article-title"></div>
                         <div class="panel-body" id="article-text">
 
                         </div>
@@ -109,18 +110,19 @@
                             <div class="form-group">
                                 @Html.Label("Cevap")
                                 @Html.DropDownList("Value", new List<SelectListItem>()
-                                                            {
-                                                                new SelectListItem {Text = "Lütfen cevabı seçiniz", Value = "", Disabled = true, Selected = true},
-                                                                new SelectListItem {Text = "A", Value = "1"},
-                                                                new SelectListItem {Text = "B", Value = "2"},
-                                                                new SelectListItem {Text = "C", Value = "3"},
-                                                                new SelectListItem {Text = "D", Value = "4"}
-                                                            }, new
-                                                            {
-                                                                @class = "form-control",
-                                                                required = "true",
-                                                                id = "answer" + i
-                                                            })
+                                {
+                                new SelectListItem {Text = "Lütfen cevabı seçiniz", Value = "", Disabled = true, Selected = true},
+                                new SelectListItem {Text = "A", Value = "1"},
+                                new SelectListItem {Text = "B", Value = "2"},
+                                new SelectListItem {Text = "C", Value = "3"},
+                                new SelectListItem {Text = "D", Value = "4"}
+                                },
+                                new
+                                {
+                                    @class = "form-control",
+                                    required = "true",
+                                    id = "answer" + i
+                                })
                             </div>
                         </div>
                     </div>
@@ -129,7 +131,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-2 col-md-offset-5">
-                    <button class="btn btn-success" id="submitButton" type="button">Sınavı Oluştur</button>
+                    <button class="btn btn-primary" id="submitButton" type="button">Sınavı Oluştur</button>
                 </div>
             </div>
 
@@ -148,9 +150,15 @@
 
                     $.getJSON("/api/wiredservice?queryString=" + link,
                         function (article) {
-                            if (!article) $("#article-text").html("<i class='text-muted text-center' id='load-state-text'>Her hangş bir içerik döndürülemedi</i>");
-                            else
+                            if (!article)
+                                $("#article-text")
+                                    .html(
+                                        "<i class='text-muted text-center' id='load-state-text'>Her hangş bir içerik döndürülemedi</i>");
+                            else {
+                                var title = $("#title option:selected").text();
                                 $("#article-text").html(article);
+                                $("#article-title").html(title);
+                            }
                         })
                         .done(function () {
                             console.log("success load titles");
@@ -243,6 +251,8 @@
                             message: "Sınav başarı ile oluşturuldu.",
                             callback: function() {
                                 document.getElementById("form").reset();
+                                $("#article-panel div").html("");
+                                location.href = "/exam/edit";
                             }
                         });
                     },

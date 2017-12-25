@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WiredExamApp.Models
 {
@@ -14,5 +13,7 @@ namespace WiredExamApp.Models
         [Required]
         public string ArticleText { get; set; }
         public ICollection<Question> Questions { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime CreateDateTime { get; set; }
     }
 }

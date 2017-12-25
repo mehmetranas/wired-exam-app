@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WiredExamApp.Models.Title>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArticleTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDateTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr id="@item.Id">
+        <td>
+            @Html.DisplayFor(modelItem => item.ArticleTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDateTime)
+        </td>
+        <td>
+            <button class="btn btn-link js-delete" data-id = "@item.Id">Sil</button>
+        </td>
+    </tr>
+}
+
+</table>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function() {
+            $(".js-delete").on("click", function () {
+                var id = $(this).attr("data-id");
+
+                bootbox.confirm({
+                    size: "small",
+                    title: "Dikkat!",
+                    buttons: {
+                        "confirm": {
+                            "label": "Evet",
+                            "className": "btn-danger"
+                        },
+                        "cancel": {
+                            "label": "İptal",
+                            "className": "btn-primary"
+                        }
+                    },
+                    message: "Bu sınavı silmek istediğinizden emin misiniz?",
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                type: "DELETE",
+                                url: "/api/exam/" + id,
+                                success: function() {
+                                    $("#" + id).remove();
+                                    console.log("successfully removed")
+                                },
+                                error: function(err) {
+                                    bootbox.alert({
+                                        size: "small",
+                                        title: "Üzgünüm!",
+                                        buttons: {
+                                            "ok": {
+                                                "label": "Tamam",
+                                                "className": "btn-info"
+                                            }
+                                        },
+                                        message: "Bir hata oluştu, sayfa yenilendikten sonra tekrar deneyiniz.",
+                                        callback: function() {
+                                            location.reload();
+                                            console.log(err);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

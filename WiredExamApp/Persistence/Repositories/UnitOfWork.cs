@@ -19,7 +19,6 @@ namespace WiredExamApp.Persistence.Repositories
             Exam = new ExamRepository(_context);
         }
 
-
         public void Complete()
         {
             _context.SaveChanges();

@@ -23,5 +23,29 @@ textarea {
     max-width: 280px;
 }*/
 
+/*Override Bootstrap*/
+.selection p {
+    margin: 0 0 0 7px;
+}
 
 /*App Style*/
+
+.exam {
+    border: 2px black solid;
+    padding: 15px 10px 20px;
+    margin-top: 20px;
+}
+
+.question {
+    margin: 10px 0 15px;
+}
+
+.selection {
+    border: 2px black solid;
+    padding: 3px;
+    margin: 4px;
+}
+
+.selection:hover {
+    cursor: pointer;
+}
