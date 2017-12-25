@@ -14,10 +14,9 @@ namespace WiredExamApp.Helper
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AnswerValidation()
+        public AnswerValidation(IUnitOfWork unitOfWork)
         {
-            var context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(context);
+            _unitOfWork = unitOfWork;
         }
         public IEnumerable<AnswerResponseDto> CheckClientAnswers(AnswerRequestDto[] answersRequestDto)
         {

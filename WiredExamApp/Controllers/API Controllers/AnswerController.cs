@@ -17,16 +17,15 @@ namespace WiredExamApp.Controllers.API_Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AnswerController()
+        public AnswerController(IUnitOfWork unitOfWork)
         {
-            var context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(context);
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
         public IEnumerable<AnswerResponseDto> CheckAnswers(AnswerRequestDto[] answersRequestDto)
         {
-            var answerValidation = new AnswerValidation();
+            var answerValidation = new AnswerValidation(_unitOfWork);
             return answerValidation.CheckClientAnswers(answersRequestDto);
         }
     }

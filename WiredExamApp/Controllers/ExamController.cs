@@ -16,10 +16,9 @@ namespace WiredExamApp.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ExamController()
+        public ExamController(IUnitOfWork unitOfWork)
         {
-            var context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Exam

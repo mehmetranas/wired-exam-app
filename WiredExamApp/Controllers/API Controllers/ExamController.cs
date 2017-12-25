@@ -20,10 +20,9 @@ namespace WiredExamApp.Controllers.API_Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ExamController()
-        {   
-            var context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(context);
+        public ExamController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
