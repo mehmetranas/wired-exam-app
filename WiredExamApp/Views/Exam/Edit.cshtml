@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Edit Articles</h2>
 
-<p>
-    @Html.ActionLink("Yeni Ekle", "Create")
+<p class="pull-right">
+    @Html.ActionLink("New Exam", "Create", null, new {@class = "btn btn-primary btn-sm"})
 </p>
 <table class="table">
     <tr>
@@ -30,7 +30,11 @@
             @Html.DisplayFor(modelItem => item.CreateDateTime)
         </td>
         <td>
-            <button class="btn btn-link js-delete" data-id = "@item.Id">Sil</button>
+            <button class="btn btn-danger js-delete" 
+                    data-id="@item.Id" data-toggle="tooltip" 
+                    data-placement="right" title="Delete">
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
         </td>
     </tr>
 }
@@ -40,24 +44,27 @@
 
 @section scripts{
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
             $(".js-delete").on("click", function () {
                 var id = $(this).attr("data-id");
 
                 bootbox.confirm({
                     size: "small",
-                    title: "Dikkat!",
+                    title: "Warning!",
                     buttons: {
                         "confirm": {
-                            "label": "Evet",
+                            "label": "Delete",
                             "className": "btn-danger"
                         },
                         "cancel": {
-                            "label": "İptal",
+                            "label": "Cancel",
                             "className": "btn-primary"
                         }
                     },
-                    message: "Bu sınavı silmek istediğinizden emin misiniz?",
+                    message: "Are you sure to delete it?",
                     callback: function (result) {
                         if (result) {
                             $.ajax({
@@ -65,19 +72,19 @@
                                 url: "/api/exam/" + id,
                                 success: function() {
                                     $("#" + id).remove();
-                                    console.log("successfully removed")
+                                    console.log("successfully removed");
                                 },
                                 error: function(err) {
                                     bootbox.alert({
                                         size: "small",
-                                        title: "Üzgünüm!",
+                                        title: "Sorry!",
                                         buttons: {
                                             "ok": {
-                                                "label": "Tamam",
+                                                "label": "Ok",
                                                 "className": "btn-info"
                                             }
                                         },
-                                        message: "Bir hata oluştu, sayfa yenilendikten sonra tekrar deneyiniz.",
+                                        message: "An error occured, please try again after page reloads.",
                                         callback: function() {
                                             location.reload();
                                             console.log(err);

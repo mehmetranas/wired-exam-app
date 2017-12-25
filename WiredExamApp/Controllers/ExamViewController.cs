@@ -20,9 +20,9 @@ namespace WiredExamApp.Controllers
         }
 
         // GET: ExamView
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var exam = _unitOfWork.Exam.GetExamById(8);
+            var exam = _unitOfWork.Exam.GetExamById(id);
             return View(exam);
         }
     }

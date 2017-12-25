@@ -3,9 +3,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
 <form id="form">
     <div class="container exam">
         <div class="row">
@@ -48,10 +45,9 @@
         <hr>
         <div class="row">
             <div class="col-md-2 col-md-offset-5">
-                <button class="btn btn-primary" id="submitButton" type="button">Sınavı Oluştur</button>
+                <button class="btn btn-primary" id="submitButton" type="button">Complete</button>
             </div>
         </div>
-
     </div>
 </form>
 
@@ -104,16 +100,15 @@
                         error: function(err) {
                             bootbox.alert({
                                 size: "small",
-                                title: "Üzgünüm!",
+                                title: "Sorry!",
                                 buttons: {
                                     "ok": {
-                                        "label": "Tamam",
+                                        "label": "Ok",
                                         "className": "btn-info"
                                     }
                                 },
-                                message: "Bir hata oluştu, sayfa yenilendikten sonra tekrar deneyiniz.",
+                                message: "An error occurred!",
                                 callback: function() {
-                                    location.reload();
                                     console.log(err);
                                 }
                             });
@@ -127,18 +122,18 @@
 
                     bootbox.confirm({
                         size: "small",
-                        title: "Dikkat!",
+                        title: "Warning!",
                         buttons: {
                             "confirm": {
-                                "label": "Evet",
+                                "label": "Confirm",
                                 "className": "btn-danger"
                             },
                             "cancel": {
-                                "label": "Hayır",
+                                "label": "Cancel",
                                 "className": "btn-primary"
                             }
                         },
-                        message: "Tüm soruları cevaplamadınız, yine de onaylamak istiyor musunuz?",
+                        message: "You did not answer all questions, do you still want to complete the exam?",
                         callback: function(result) {
                             if (result) {
                                 getAnswers();

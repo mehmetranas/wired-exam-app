@@ -24,6 +24,10 @@ textarea {
 }*/
 
 /*Override Bootstrap*/
+body {
+    font-family: 'Oxygen', sans-serif;
+}
+
 .selection p {
     margin: 0 0 0 7px;
 }
@@ -37,7 +41,17 @@ textarea {
     color: white;
 }
 
+a {
+    color: black;
+    text-decoration: none;
+}
+
 /*App Style*/
+.article {
+    font-family: 'Quattrocento', serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
 
 .exam {
     border: 2px black solid;
