@@ -12,11 +12,13 @@ namespace WiredExamApp.Persistence.Repositories
         private readonly ApplicationDbContext _context;
 
         public IExamRepository Exam { get; }
+        public IQuestionRepository Question { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Exam = new ExamRepository(_context);
+            Question = new QuestionRepository(_context);
         }
 
         public void Complete()

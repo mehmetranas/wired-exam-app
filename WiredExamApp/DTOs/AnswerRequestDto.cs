@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WiredExamApp.DTOs
 {
-    public class AnswerDto
+    public class AnswerRequestDto
     {
         public string QuestionId { get; set; }
         public string AnswerValue { get; set; }

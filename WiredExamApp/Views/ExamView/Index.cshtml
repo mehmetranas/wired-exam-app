@@ -58,7 +58,7 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            var answers = [];
+            var clientAnswers = [];
 
             $(".selection").hover(function() {
                 $(this).toggleClass("bg-info");
@@ -72,22 +72,34 @@
                         questionId: $(this).closest(".question").attr("data-question-id"),
                         answerValue: $(this).attr("data-answer-value")
                     };
-                    var answerInAnswers = answers.find(function (ans) { return ans.questionId === answer.questionId });
+                    var answerInAnswers = clientAnswers.find(function (ans) { return ans.questionId === answer.questionId });
                     if (answerInAnswers) {
                         answerInAnswers.answerValue = answer.answerValue;
                     } else {
-                        answers.push(answer);
+                        clientAnswers.push(answer);
                     }
                 });
             $("#submitButton").click(function () {
-                console.log(answers);
+                console.log(clientAnswers);
                 function getAnswers() {
                     $.ajax({
                         type: "POST",
                         url: "/api/answer",
-                        data: answers,
-                        success: function() {
+                        data: JSON.stringify(clientAnswers),
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function(data) {
                             console.log("successfully posted");
+                            console.log(data);
+                            data.forEach(function (res) {
+                               var selection = $("[data-question-id='" + res.questionId + "']")
+                                    .find("[data-answer-value='" + res.rightAnswerValue + "']");
+                                if (res.clientIsRight) {
+                                        selection.addClass("bg-success");
+                                } else {
+                                    selection.addClass("bg-danger");
+                                }
+                            });
                         },
                         error: function(err) {
                             bootbox.alert({
@@ -110,7 +122,7 @@
 
                 }
 
-                var isValid = answers.length === 4;
+                var isValid = clientAnswers.length === 4;
                 if (!isValid) {
 
                     bootbox.confirm({

@@ -6,11 +6,8 @@ using WiredExamApp.Models;
 
 namespace WiredExamApp.Core.Repositories
 {
-    public interface IUnitOfWork
+    public interface IQuestionRepository
     {
-        IExamRepository Exam { get; }
-        IQuestionRepository Question { get; }
-
-        void Complete();
+        string GetQuestionAnswerById(int id);
     }
 }

@@ -245,13 +245,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Core\Repositories\IUnitOfWork.cs" />
-    <Compile Include="DTOs\AnswerDto.cs" />
+    <Compile Include="Core\Repositories\QuestionRepository.cs" />
+    <Compile Include="DTOs\AnswerRequestDto.cs" />
+    <Compile Include="DTOs\AnswerResponseDto.cs" />
     <Compile Include="DTOs\ExamDto.cs" />
     <Compile Include="DTOs\QuestionDto.cs" />
     <Compile Include="DTOs\SelectionDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AnswerValidation.cs" />
     <Compile Include="Helper\Validations.cs" />
     <Compile Include="Migrations\201712241559520_Initial model.cs" />
     <Compile Include="Migrations\201712241559520_Initial model.Designer.cs">
@@ -269,6 +272,7 @@
     <Compile Include="Core\Repositories\IExamRepository.cs" />
     <Compile Include="Models\Title.cs" />
     <Compile Include="Persistence\Repositories\ExamRepository.cs" />
+    <Compile Include="Persistence\Repositories\QuestionRepository.cs" />
     <Compile Include="Persistence\Repositories\UnitOfWork.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />

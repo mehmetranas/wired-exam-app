@@ -28,6 +28,15 @@ textarea {
     margin: 0 0 0 7px;
 }
 
+.bg-success {
+    background-color: #02A505;
+}
+
+.bg-danger {
+    background-color: #EA1604;
+    color: white;
+}
+
 /*App Style*/
 
 .exam {
