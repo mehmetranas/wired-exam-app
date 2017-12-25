@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Data.Entity;
+using AutoMapper;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WiredExamApp.App_Start;
+using WiredExamApp.Persistence.Model;
 
 namespace WiredExamApp
 {
@@ -11,6 +13,7 @@ namespace WiredExamApp
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();
