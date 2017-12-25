@@ -15,5 +15,8 @@ namespace WiredExamApp.Models
         public ICollection<Question> Questions { get; set; }
         [Column(TypeName = "date")]
         public DateTime CreateDateTime { get; set; }
+        [NotMapped]
+        [Display(Name = "Created Date")]
+        public string ShortDate => $"{CreateDateTime:dd-MM-yy}";
     }
 }

@@ -121,7 +121,6 @@
                 if (!isValid) {
 
                     bootbox.confirm({
-                        size: "small",
                         title: "Warning!",
                         buttons: {
                             "confirm": {
@@ -133,7 +132,7 @@
                                 "className": "btn-primary"
                             }
                         },
-                        message: "You did not answer all questions, do you still want to complete the exam?",
+                        message: "You did not answer all questions, do you still want to complete the exam? Empty questions answer, will not retrun.",
                         callback: function(result) {
                             if (result) {
                                 getAnswers();

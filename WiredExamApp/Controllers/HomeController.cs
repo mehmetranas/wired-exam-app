@@ -13,30 +13,15 @@ namespace WiredExamApp.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController()
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            var context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(context);
+            _unitOfWork = unitOfWork;
         }
 
         public ActionResult Index()
         {
             var exams = _unitOfWork.Exam.GetExams();
 ;           return View(exams);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

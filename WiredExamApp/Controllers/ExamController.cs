@@ -10,6 +10,7 @@ using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Controllers
 {
+    [Authorize]
     public class ExamController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

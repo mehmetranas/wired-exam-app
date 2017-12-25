@@ -9,6 +9,9 @@ using Ninject.Web.Common;
 using Ninject.Web.Common.WebHost;
 using Ninject.Web.WebApi;
 using WiredExamApp.App_Start;
+using WiredExamApp.Core.Repositories;
+using WiredExamApp.Models;
+using WiredExamApp.Persistence.Repositories;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -36,6 +39,7 @@ namespace WiredExamApp.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
 
             RegisterServices(kernel);
             GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);

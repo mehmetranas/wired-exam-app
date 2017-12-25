@@ -174,10 +174,10 @@
 
 
             $("#submitButton").click(function () {
-                var valid = $('form')[0].checkValidity();
+                var valid = $('#form')[0].checkValidity();
+                debugger
                 if (!valid) {
                     bootbox.alert({
-                        size: "small",
                         title: "Opps!",
                         buttons: {
                             "ok": {

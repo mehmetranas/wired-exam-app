@@ -13,6 +13,7 @@ using WiredExamApp.Models;
 
 namespace WiredExamApp.Controllers.API_Controllers
 {
+    [Authorize]
     public class WiredServiceController : ApiController
     {
         [HttpGet]

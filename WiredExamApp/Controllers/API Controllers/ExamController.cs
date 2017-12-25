@@ -14,6 +14,7 @@ using WiredExamApp.Persistence.Repositories;
 
 namespace WiredExamApp.Controllers.API_Controllers
 {
+    [Authorize]
     public class ExamController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -32,7 +33,7 @@ namespace WiredExamApp.Controllers.API_Controllers
             if (!modelValidate) return BadRequest();
 
             var exam = Mapper.Map<ExamDto,Exam>(examDto);
-            exam.CreateDateTime = DateTime.Now.Date;
+            exam.CreateDateTime = DateTime.Now;
             _unitOfWork.Exam.Add(exam);
             _unitOfWork.Complete();
             return Ok();
