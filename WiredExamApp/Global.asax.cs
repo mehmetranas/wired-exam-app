@@ -13,7 +13,7 @@ namespace WiredExamApp
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();
