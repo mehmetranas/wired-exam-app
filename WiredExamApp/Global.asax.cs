@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WiredExamApp.App_Start;
+using WiredExamApp.Persistence.Migrations;
 using WiredExamApp.Persistence.Model;
 
 namespace WiredExamApp
@@ -13,7 +14,7 @@ namespace WiredExamApp
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();
