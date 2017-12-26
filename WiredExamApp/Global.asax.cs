@@ -14,7 +14,6 @@ namespace WiredExamApp
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<ApplicationDbContext>(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             AreaRegistration.RegisterAllAreas();

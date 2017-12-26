@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
+using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 using Ninject.Web.Common.WebHost;
 using Ninject.Web.WebApi;
@@ -38,7 +39,13 @@ namespace WiredExamApp.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+
+            kernel.Bind(x =>
+            {
+                x.FromThisAssembly()
+                    .SelectAllClasses()
+                    .BindDefaultInterface();
+            });
 
             RegisterServices(kernel);
             GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
